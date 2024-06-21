@@ -39,15 +39,15 @@ logging:
             UsernamePasswordAuthenticationFilter: DEBUG
           firewall: DEBUG
 springdoc:
-  api-docs:
-    path: /v3/api-docs  # Đường dẫn đến tài liệu OpenAPI
   swagger-ui:
-    path: /swagger-ui.html  # Đường dẫn đến giao diện Swagger UI
-    disable-swagger-default-url: true
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
 open:
   api:
     title: Bank API Document
     version: 2.0
     description : Bank API Service
-    serverURL : http//:localhost:8031
+    serverURL :
     serverName : serverTest
+
