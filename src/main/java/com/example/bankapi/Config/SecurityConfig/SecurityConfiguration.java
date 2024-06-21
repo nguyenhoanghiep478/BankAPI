@@ -4,6 +4,7 @@ import com.example.bankapi.ExceptionHandle.AccessDeniedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
+@Order(2)
 public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
@@ -28,19 +30,13 @@ public class SecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/auth/**",
+                                "/public/**",
                                 "/permit-url",
-                                "/api-docs",
-                                "/v2/api-docs",
-                                "/v3/api-docs",
                                 "/v3/api-docs/**",
-                                "/swagger-resources",
-                                "/swagger-resources/**",
-                                "/configuration/ui",
-                                "configuration/security",
+                                "/v3/api-docs",
                                 "/swagger-ui/**",
-                                "/webjars/**",
-                                "/swagger-ui.html")
+                                "/swagger-ui.html"
+                                )
                         .permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest()

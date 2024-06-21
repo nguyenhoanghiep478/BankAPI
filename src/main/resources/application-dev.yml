@@ -23,6 +23,31 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        security.web:
+          FilterChainProxy: DEBUG
+          access:
+            ExceptionTranslationFilter: DEBUG
+            intercept:
+              FilterSecurityInterceptor: DEBUG
+          authentication:
+            UsernamePasswordAuthenticationFilter: DEBUG
+          firewall: DEBUG
 springdoc:
   api-docs:
-    path: /api-docs
+    path: /v3/api-docs  # Đường dẫn đến tài liệu OpenAPI
+  swagger-ui:
+    path: /swagger-ui.html  # Đường dẫn đến giao diện Swagger UI
+    disable-swagger-default-url: true
+open:
+  api:
+    title: Bank API Document
+    version: 2.0
+    description : Bank API Service
+    serverURL : http//:localhost:8031
+    serverName : serverTest
