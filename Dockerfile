@@ -11,7 +11,7 @@ COPY . .
 
 RUN chmod +x ./gradlew
 # Chạy lệnh build và ghi lại log
-RUN ./gradlew clean build -x test > build.log 2>&1 || (cat build.log && exit 1)
+RUN ./gradlew clean build --info -x test > build.log 2>&1 || (cat build.log && exit 1)
 
 # Stage 2: Package stage
 FROM openjdk:22-jdk-slim
