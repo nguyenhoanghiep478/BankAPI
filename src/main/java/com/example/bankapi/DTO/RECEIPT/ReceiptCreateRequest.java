@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class ReceiptCreateRequest {
     private String accountNumber;
     private double amount;
-    private String transactionId;
     private String receiptType;
     private String receiveAccountNumber;
 }

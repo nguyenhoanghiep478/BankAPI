@@ -18,11 +18,11 @@ import java.util.List;
 @Configuration
 public class SwaggerConfig {
     @Bean
-    public OpenAPI openAPI(@Value("${open.api.title}") String title,
-                           @Value("${open.api.version}") String version,
-                           @Value("${open.api.description}") String description,
-                           @Value("${open.api.serverURL}") String serverUrl,
-                           @Value("${open.api.serverName}") String serverName) {
+    public OpenAPI openAPI(@Value("${openapi.title}") String title,
+                           @Value("${openapi.version}") String version,
+                           @Value("${openapi.description}") String description,
+                           @Value("${openapi.serverURL}") String serverUrl,
+                           @Value("${openapi.serverName}") String serverName) {
         return new OpenAPI().info(
                         new Info()
                                 .description(description)

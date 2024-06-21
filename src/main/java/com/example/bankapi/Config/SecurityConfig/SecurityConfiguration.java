@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                                 "/public/**",
                                 "/permit-url",
                                 "/v3/api-docs/**",
-                                "/v3/api-docs",
+                                "/v3/api-docs/public/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                                 )
