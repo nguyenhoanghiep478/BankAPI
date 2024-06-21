@@ -43,8 +43,7 @@ springdoc:
     path: /swagger-ui.html
   api-docs:
     path: /v3/api-docs
-open:
-  api:
+openapi:
     title: Bank API Document
     version: 2.0
     description : Bank API Service
