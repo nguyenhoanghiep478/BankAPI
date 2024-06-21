@@ -18,4 +18,6 @@ FROM openjdk:22-jdk-slim
 WORKDIR /app
 COPY --from=build /app/build/libs/BANKAPI-0.0.1-SNAPSHOT.jar /app/BANKAPI-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
+
+ENV SPRING_PROFILES_ACTIVE=dev
 ENTRYPOINT ["java", "-jar", "/app/BANKAPI-0.0.1-SNAPSHOT.jar"]
