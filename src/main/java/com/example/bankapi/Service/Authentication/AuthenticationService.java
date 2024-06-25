@@ -44,8 +44,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
+        var user = repository.findByEmail(request.getEmail());
         AuthenticateResponse response = modelMapper.map(user, AuthenticateResponse.class);
         String token = jwtService.generateToken(user);
         response.setToken(token);

@@ -1,6 +1,7 @@
 package com.example.bankapi.Entity.Receipt;
 
 import com.example.bankapi.Entity.BankAccount.Account;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,7 @@ public class Receipt {
     @Column(nullable = false)
     private String receiptType;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name="account_id",referencedColumnName = "id")
     private Account account;
 }

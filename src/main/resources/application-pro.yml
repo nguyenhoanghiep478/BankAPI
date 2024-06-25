@@ -5,19 +5,19 @@ spring:
   application:
     name: BANKAPI
   datasource:
-    url: jdbc:postgresql://hiep-michael-7070.6xw.aws-ap-southeast-1.cockroachlabs.cloud:26257/BankDATABASE?sslmode=verify-full
-    username: hiep
-    password: 6F3u_EmyXaQscJ9JmG-Yjw
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://sql12.freesqldatabase.com:3306/sql12715363
+    password: lgL1fRfhQd
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sql12715363
 
   jpa:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   config:
     import: optional:file:.env[.properties]
   mvc:
@@ -38,6 +38,8 @@ logging:
           authentication:
             UsernamePasswordAuthenticationFilter: DEBUG
           firewall: DEBUG
+      hibernate.sql: DEBUG
+      hibernate.type.descriptor.sql.BasicBinder: TRACE
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

@@ -33,9 +33,7 @@ public class AppConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return username -> userRepository
-                .findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        return userRepository::findByEmail;
 
     }
     @Bean
@@ -67,8 +65,8 @@ public class AppConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500/*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONAL"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source  = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);

@@ -3,7 +3,6 @@ package com.example.bankapi.DTO.RECEIPT;
 import lombok.Data;
 
 @Data
-public class ReceiptCreateResponse {
+public class getReceiptByAccountNumberRequest {
     private String accountNumber;
-    private double amount;
 }

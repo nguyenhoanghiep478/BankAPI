@@ -1,8 +1,7 @@
 package com.example.bankapi.Service.BankAccount;
 
 import com.example.bankapi.Config.GlobalConfig.StaticVar;
-import com.example.bankapi.DTO.BankAccount.AccountRegistryResponse;
-import com.example.bankapi.DTO.BankAccount.AccountRegistryRequest;
+import com.example.bankapi.DTO.BankAccount.*;
 import com.example.bankapi.Entity.BankAccount.Account;
 import com.example.bankapi.Entity.BankAccount.CheckingAccount;
 import com.example.bankapi.Entity.BankAccount.SavingAccount;
@@ -14,18 +13,16 @@ import com.example.bankapi.Repositories.User;
 import com.example.bankapi.Service.BankAccount.Strategy.AccountStrategy;
 import com.example.bankapi.Service.BankAccount.Strategy.impl.CheckingAccountStrategy;
 import com.example.bankapi.Service.BankAccount.Strategy.impl.SavingAccountStrategy;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -75,10 +72,10 @@ public class AccountService {
     }
     @Transactional
     public boolean handleBalanceByReceipt(Receipt receipt,String receiveAccountNumber){
-        switch (receipt.getReceiptType()) {
+        switch (receipt.getReceiptType().toUpperCase()) {
             case StaticVar.DEPOSIT_RECEIPT:{
-                return updateAmount(receipt.getAccountNumber(), receipt.getAmount());
-
+                boolean isSucceed =  updateAmount(receipt.getAccountNumber(), receipt.getAmount());
+                return isSucceed;
             }
             case StaticVar.WITHDRAWAL_RECEIPT:{
                 if(receipt.getAccount().getAccountType().equals(StaticVar.CHECKING_ACCOUNT)){
@@ -111,24 +108,24 @@ public class AccountService {
     }
 
     public Account createInforAccount(AccountRegistryRequest request){
-        var user = this.user.findByEmail(request.getUserEmail()).orElseThrow();
+        var user = this.user.findByEmail(request.getUserEmail());
         var account = Account.builder()
-                .accountType(request.getAccountType())
+                .accountType(request.getAccountType().toLowerCase())
                 .createDate(LocalDateTime.now())
                 .balance(StaticVar.INIT_BALANCE)
-                .accountNumber(getAccountNumber())
+                .accountNumber(request.getAccountNumber()==null? getAccountNumber(): request.getAccountNumber())
                 .user(user)
                 .build();
-        if(request.getAccountType().equals(StaticVar.SAVING_ACCOUNT)){
+        if(request.getAccountType().equalsIgnoreCase(StaticVar.SAVING_ACCOUNT)){
             return modelMapper.map(account,SavingAccount.class);
         }
-        if(request.getAccountType().equals(StaticVar.CHECKING_ACCOUNT)){
+        if(request.getAccountType().equalsIgnoreCase(StaticVar.CHECKING_ACCOUNT)){
             return modelMapper.map(account,CheckingAccount.class);
         }
         return null;
     }
 
-    private String getAccountNumber() {
+    public String getAccountNumber() {
         String accountNumber = generateAccountNumber();
         while(accountRepository.existsByAccountNumber(accountNumber)){
             accountNumber = getAccountNumber();
@@ -146,5 +143,82 @@ public class AccountService {
     @Transactional(readOnly = true)
     public Account findByAccountNumber(String accountNumber) {
         return accountRepository.findAccountByAccountNumber(accountNumber);
+    }
+    public getAccountByAccountNumberResponse findByAccountNumber(getAccountByAccountNumberRequest request){
+        TypedQuery<Account> query = manager.createQuery("SELECT new Account(a.accountNumber,a.accountType,a.user)" +
+                "FROM Account a WHERE a.accountNumber= :accountNumber", Account.class);
+         query.setParameter("accountNumber", request.getAccountNumber());
+        try {
+            Account account = query.getSingleResult();
+            getAccountByAccountNumberResponse response = modelMapper.map(account, getAccountByAccountNumberResponse.class);
+            response.setFullName(account.getUser().getFullName());
+            return response;
+        } catch (NoResultException e) {
+            // Handle the case where no account is found for the given number
+            log.error("Account with number " + request.getAccountNumber() + " not found", e);
+            // You can return a specific error object or throw a custom exception here
+            return null; // Or throw a new MyAccountNotFoundException();
+        } catch (NonUniqueResultException e) {
+            // Handle the case where multiple accounts have the same number (highly unlikely)
+            log.error("Multiple accounts found with number " + request.getAccountNumber(), e);
+            // You can throw an exception indicating data inconsistency or handle it differently
+            throw new IllegalStateException("Multiple accounts found for the same number");
+        } catch (PersistenceException e) {
+            // Catch other general persistence exceptions (e.g., database connection issues)
+            log.error("Error retrieving account by number: " + request.getAccountNumber(), e);
+            // You can throw a more specific exception or handle it based on your application logic
+            throw new RuntimeException("Error retrieving account", e);
+        }
+
+    }
+//    public List<SavingAccount> getSavingAccountsByEmail(String userEmail) {
+//        return accountRepository.findSavingAccountsByUserEmail(userEmail);
+//    }
+//
+//    public List<CheckingAccount> getCheckingAccountsByEmail(String userEmail) {
+//        return accountRepository.findCheckingAccountsByUserEmail(userEmail);
+//    }
+//
+//    public GetBankAccountsResponse findAllAccountByUserEmail(String email) {
+//        List<CheckingAccount> checkingAccounts = getCheckingAccountsByEmail(email);
+//        List<SavingAccount> savingAccounts = getSavingAccountsByEmail(email);
+//        GetBankAccountsResponse response = new GetBankAccountsResponse();
+//        for(CheckingAccount account:checkingAccounts){
+//            response.getAccounts().add(modelMapper.map(account, GetBankAccountResponse.class));
+//        }
+//        return response;
+//    }
+    public List<Account> getAllAccounts(){
+        TypedQuery<Account> query = manager.createQuery("SELECT a FROM Account a WHERE a.user.id = :userId", Account.class);
+        query.setParameter("userId", 1);
+        return query.getResultList();
+    }
+//   public  GetBankAccountsResponse findAccountsByEmail(String email) {
+//            List<BankAccountInfo> accountInfos= accountRepository.findAccountByUserEmail(email);
+//            GetBankAccountsResponse response = new GetBankAccountsResponse();
+//            for(BankAccountInfo info : accountInfos){
+//                response.getAccounts().add(modelMapper.map(info, GetBankAccountResponse.class));
+//            }
+//            return response;
+//    }
+       public GetBankAccountsResponse findAccountByEmail(String email) {
+           TypedQuery<Account> query = manager.createQuery("SELECT a FROM Account a WHERE a.user.email = :email", Account.class);
+           query.setParameter("email", email);
+           List<Account> accounts= query.getResultList();
+           GetBankAccountsResponse response = new GetBankAccountsResponse();
+           for(Account account : accounts){
+               response.getAccounts().add(modelMapper.map(account, GetBankAccountResponse.class));
+           }
+           return response;
+        }
+    public GetBankAccountsResponse findCheckingAccountByEmail(String email) {
+        TypedQuery<Account> query = manager.createQuery("SELECT a FROM Account a WHERE a.user.email = :email and a.accountType = 'checking'", Account.class);
+        query.setParameter("email", email);
+        List<Account> accounts= query.getResultList();
+        GetBankAccountsResponse response = new GetBankAccountsResponse();
+        for(Account account : accounts){
+            response.getAccounts().add(modelMapper.map(account, GetBankAccountResponse.class));
+        }
+        return response;
     }
 }

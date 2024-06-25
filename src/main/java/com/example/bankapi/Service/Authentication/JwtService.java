@@ -1,5 +1,6 @@
 package com.example.bankapi.Service.Authentication;
 
+import com.example.bankapi.Config.GlobalConfig.StaticVar;
 import com.example.bankapi.Entity.Authentication.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,8 +21,6 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
     private final String SECRET_KEY="3dfecff85e32a48ab67a977dd964d8d8848e4f048b5065d65e266d8b99b0291a" ;
-//    private final JwtBlacklistService blacklistService;
-    private static final long JWT_EXPIRATION = 1000 * 60 * 5;
     private final JwtBlacklistService blacklistService;
 
     public String extractUserName(String token) {
@@ -53,7 +52,7 @@ public class JwtService {
                 .setSubject(user.getUsername())
                 .claim("scope",buildScope(user))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ JWT_EXPIRATION))
+                .setExpiration(new Date(System.currentTimeMillis()+ StaticVar.JWT_EXPIRATION))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
 
