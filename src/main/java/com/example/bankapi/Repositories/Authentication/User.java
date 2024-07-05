@@ -1,4 +1,4 @@
-package com.example.bankapi.Repositories;
+package com.example.bankapi.Repositories.Authentication;
 
 import com.example.bankapi.Entity.Authentication.ROLE;
 import com.example.bankapi.Entity.BankAccount.CheckingAccount;
@@ -15,7 +15,7 @@ public interface User extends JpaRepository<com.example.bankapi.Entity.Authentic
    com.example.bankapi.Entity.Authentication.User findByEmail(String email);
     boolean existsByRole(ROLE role);
     boolean existsByEmail(String email);
-    List<SavingAccount> findUserByEmail(String email);
+
 //    @Query("SELECT u.savingAccounts FROM User u WHERE u.email = :email")
 //    List<SavingAccount> findSavingAccountsByEmail(@Param("email") String email);
 //

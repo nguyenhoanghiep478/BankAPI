@@ -4,7 +4,10 @@ import com.example.bankapi.DTO.Authentication.AuthenticateRequest;
 import com.example.bankapi.DTO.Authentication.AuthenticateResponse;
 import com.example.bankapi.DTO.Authentication.RegisterRequest;
 import com.example.bankapi.DTO.Authentication.RegisterResponse;
+import com.example.bankapi.DTO.Email.EmailRequest;
+import com.example.bankapi.DTO.Email.VerificationEmailRequest;
 import com.example.bankapi.Service.Authentication.AuthenticationService;
+import com.example.bankapi.Service.Email.IEmailService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name="Authentication Controller")//gán tên cho swagger
 public class AuthenticationController {
     private final AuthenticationService service;
-
+    private final IEmailService emailService;
     @PostMapping ("/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(service.register(request));
@@ -32,5 +35,12 @@ public class AuthenticationController {
         String jwtToken = token.replace("Bearer ","");
         service.logOut(jwtToken);
     }
-
+    @PostMapping("/send-email")
+    public ResponseEntity<String> sendMail(@RequestBody EmailRequest request){
+        return ResponseEntity.ok(emailService.sendSimpleMail(request));
+    }
+    @GetMapping("/verify-email")
+    public ResponseEntity<String> verifyEmail(@RequestBody VerificationEmailRequest request){
+        return ResponseEntity.ok(emailService.verifyEmail(request));
+    }
 }
