@@ -5,12 +5,11 @@ import com.example.bankapi.DTO.RECEIPT.ReceiptCreateRequest;
 import com.example.bankapi.DTO.RECEIPT.ReceiptCreateResponse;
 import com.example.bankapi.DTO.RECEIPT.getReceiptByAccountNumberRequest;
 import com.example.bankapi.DTO.RECEIPT.getReceiptByAccountNumberResponse;
-import com.example.bankapi.Entity.BankAccount.Account;
 import com.example.bankapi.Entity.Receipt.DepositReceipt;
 import com.example.bankapi.Entity.Receipt.Receipt;
 import com.example.bankapi.Entity.Receipt.TransferReceipt;
 import com.example.bankapi.Entity.Receipt.WithdrawalReceipt;
-import com.example.bankapi.Service.BankAccount.AccountService;
+import com.example.bankapi.Service.BankAccount.IAccountService;
 import com.example.bankapi.Service.BankService.impl.DepositReceiptStrategy;
 import com.example.bankapi.Service.BankService.impl.TransferReceiptStrategy;
 import com.example.bankapi.Service.BankService.impl.WithdrawalReceiptStrategy;
@@ -33,12 +32,12 @@ public class ReceiptService {
     private final ModelMapper modelMapper;
     @PersistenceContext
     private final EntityManager manager;
-    private final AccountService accountService ;
+    private final IAccountService accountService ;
     public ReceiptService(DepositReceiptStrategy depositReceiptStrategy,
                           TransferReceiptStrategy transferReceiptStrategy,
                           WithdrawalReceiptStrategy withdrawalReceiptStrategy,
                           ModelMapper modelMapper,
-                          AccountService accountService,
+                          IAccountService accountService,
                           EntityManager manager){
         this.strategies.put(DepositReceipt.class,depositReceiptStrategy);
         this.strategies.put(TransferReceipt.class,transferReceiptStrategy);

@@ -1,4 +1,4 @@
-package com.example.bankapi.Service.BankAccount;
+package com.example.bankapi.Service.BankAccount.impl;
 
 import com.example.bankapi.Config.GlobalConfig.StaticVar;
 import com.example.bankapi.DTO.BankAccount.*;
@@ -10,6 +10,7 @@ import com.example.bankapi.ExceptionHandle.InsufficientBalanceException;
 import com.example.bankapi.ExceptionHandle.InvalidAccountTypeException;
 import com.example.bankapi.Repositories.BankAccount.AccountRepository;
 import com.example.bankapi.Repositories.Authentication.User;
+import com.example.bankapi.Service.BankAccount.IAccountService;
 import com.example.bankapi.Service.BankAccount.Strategy.AccountStrategy;
 import com.example.bankapi.Service.BankAccount.Strategy.impl.CheckingAccountStrategy;
 import com.example.bankapi.Service.BankAccount.Strategy.impl.SavingAccountStrategy;
@@ -25,7 +26,7 @@ import java.util.*;
 
 @Service
 @Slf4j
-public class AccountService {
+public class AccountServiceImpl implements IAccountService {
     private final Map<Class<? extends Account>, AccountStrategy> strategies = new HashMap<>();
     private final AccountRepository accountRepository;
     @PersistenceContext
@@ -33,7 +34,7 @@ public class AccountService {
     private final User user;
     private final ModelMapper modelMapper;
     @Autowired
-    public AccountService(SavingAccountStrategy savingAccount, CheckingAccountStrategy checkingAccount,ModelMapper modelMapper,User user,AccountRepository accountRepository,EntityManager entityManager){
+    public AccountServiceImpl(SavingAccountStrategy savingAccount, CheckingAccountStrategy checkingAccount, ModelMapper modelMapper, User user, AccountRepository accountRepository, EntityManager entityManager){
         this.strategies.put(SavingAccount.class,savingAccount);
         this.strategies.put(CheckingAccount.class,checkingAccount);
         this.modelMapper = modelMapper;
