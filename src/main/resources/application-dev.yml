@@ -1,10 +1,5 @@
 server:
-<<<<<<< HEAD
   port: 8022
-=======
-  port: 8031
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
-
 spring:
   application:
     name: BANKAPI
@@ -27,7 +22,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-<<<<<<< HEAD
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
@@ -40,10 +34,6 @@ spring:
           auth: true
           starttls:
             enable: true
-
-
-=======
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 
 
 logging:
@@ -60,14 +50,11 @@ logging:
           authentication:
             UsernamePasswordAuthenticationFilter: DEBUG
           firewall: DEBUG
-<<<<<<< HEAD
         boot:
           autoconfigure:
             jdbc:
               DataSourceConfiguration: DEBUG
 
-=======
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -79,7 +66,6 @@ openapi:
     description : Bank API Service
     serverURL :
     serverName : serverTest
-<<<<<<< HEAD
 management:
   endpoints:
     web:
@@ -88,5 +74,3 @@ management:
   endpoint:
     health:
       show-details: always
-=======
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
