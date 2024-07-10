@@ -1,12 +1,9 @@
 package com.example.bankapi.Entity.Authentication;
 
 import com.example.bankapi.Entity.BankAccount.Account;
-<<<<<<< HEAD
-=======
 import com.example.bankapi.Entity.BankAccount.CheckingAccount;
 import com.example.bankapi.Entity.BankAccount.SavingAccount;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
