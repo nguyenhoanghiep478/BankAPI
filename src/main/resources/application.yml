@@ -1,10 +1,5 @@
 server:
-<<<<<<< HEAD
-  port: 8031
-=======
   port: 8080
-
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 
 spring:
   application:
@@ -56,9 +51,5 @@ openapi:
   description : Bank API Service
   serverURL :
   serverName : serverTest
-
-
-=======
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 
 
