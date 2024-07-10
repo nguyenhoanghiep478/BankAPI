@@ -1,0 +1,37 @@
+package com.example.bankapi.Controller.UserController;
+
+import com.example.bankapi.DTO.Email.EmailRequest;
+import com.example.bankapi.DTO.Email.VerificationEmailRequest;
+import com.example.bankapi.Service.Email.IEmailService;
+import com.example.bankapi.Service.Email.impl.EmailService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
+
+@RestController
+@Slf4j
+@Tag(name="User Controller")//gán tên cho swagger
+@RequiredArgsConstructor
+public class HomeController {
+
+    @GetMapping("/home")
+    public String home(){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        log.info("Username: {}",authentication.getName());
+        authentication.getAuthorities().forEach(s-> log.info(s.getAuthority()));
+        return "HEllO";
+    }
+    @GetMapping("/permit-url")
+    public String permitPage(){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        log.info("Username: {}",authentication.getName());
+        authentication.getAuthorities().forEach(s-> log.info(s.getAuthority()));
+        return "HEllO THERE";
+    }
+
+}
