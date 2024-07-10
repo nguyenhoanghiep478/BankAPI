@@ -9,6 +9,10 @@ spring:
     username: hiep
     password: Hiep31082003
     driver-class-name: com.mysql.cj.jdbc.Driver
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
   jpa:
     show-sql: true
     properties:
@@ -56,9 +60,12 @@ openapi:
     description : Bank API Service
     serverURL :
     serverName : serverTest
+<<<<<<< HEAD
 
 management:
   endpoints:
     web:
       exposure:
         include: *
+=======
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3

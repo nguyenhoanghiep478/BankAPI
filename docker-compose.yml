@@ -1,6 +1,10 @@
 services:
   mysql:
+<<<<<<< HEAD
     image: nguyenhoanghiep478/mysql:8.0
+=======
+    image: mysql:8.0
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
     container_name: mysql-container
     restart: always
     environment:
@@ -13,7 +17,13 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
   bank-app:
+<<<<<<< HEAD
     image: nguyenhoanghiep478/bank-app-compose-bank-app
+=======
+    build:
+      context: .
+      dockerfile: Dockerfile
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
     restart: unless-stopped
 
     environment:

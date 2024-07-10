@@ -1,5 +1,10 @@
 server:
+<<<<<<< HEAD
   port: 8031
+=======
+  port: 8080
+
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 
 spring:
   application:
@@ -20,6 +25,7 @@ spring:
       ddl-auto: update
   config:
     import: optional:file:.env[.properties]
+<<<<<<< HEAD
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -52,5 +58,7 @@ openapi:
   serverName : serverTest
 
 
+=======
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 
 

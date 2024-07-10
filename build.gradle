@@ -45,6 +45,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation group: 'redis.clients', name: 'jedis', version: '5.2.0-beta4'
     runtimeOnly 'com.mysql:mysql-connector-j'
+<<<<<<< HEAD
 //    API DOCUMENT Libraries
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.5.0'
     //Spring boot actuator
@@ -61,5 +62,13 @@ tasks.named('test') {
     useJUnitPlatform()
 
 }
+<<<<<<< HEAD
 
+=======
+task printActiveProfiles {
+    doLast {
+        println "Active profiles: ${System.getProperty('spring.profiles.active')}"
+    }
+}
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 

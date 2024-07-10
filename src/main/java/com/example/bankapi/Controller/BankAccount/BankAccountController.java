@@ -2,7 +2,11 @@ package com.example.bankapi.Controller.BankAccount;
 
 import com.example.bankapi.DTO.BankAccount.*;
 import com.example.bankapi.Entity.BankAccount.Account;
+<<<<<<< HEAD
 import com.example.bankapi.Service.BankAccount.IAccountService;
+=======
+import com.example.bankapi.Service.BankAccount.AccountService;
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 import com.example.bankapi.Service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +23,11 @@ import java.util.List;
 @SecurityRequirement(name="bearerAuth")
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 public class BankAccountController {
+<<<<<<< HEAD
     private final IAccountService accountService;
+=======
+    private final AccountService accountService;
+>>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
     private final UserService userService;
     @PostMapping ("/registry")
     public ResponseEntity<AccountRegistryResponse> accountRegistry(@RequestBody AccountRegistryRequest accountRegistryRequest){
