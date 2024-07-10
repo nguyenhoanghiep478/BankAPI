@@ -20,7 +20,6 @@ spring:
       ddl-auto: update
   config:
     import: optional:file:.env[.properties]
-<<<<<<< HEAD
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
