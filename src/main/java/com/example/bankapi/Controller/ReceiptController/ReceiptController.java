@@ -4,11 +4,7 @@ import com.example.bankapi.DTO.RECEIPT.ReceiptCreateRequest;
 import com.example.bankapi.DTO.RECEIPT.ReceiptCreateResponse;
 import com.example.bankapi.DTO.RECEIPT.getReceiptByAccountNumberRequest;
 import com.example.bankapi.DTO.RECEIPT.getReceiptByAccountNumberResponse;
-<<<<<<< HEAD
 import com.example.bankapi.Service.BankService.IReceiptService;
-=======
-import com.example.bankapi.Service.BankService.ReceiptService;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +23,7 @@ import java.util.List;
 @Tag(name="Receipt Controller")//gán tên cho swagger
 @SecurityRequirement(name="bearerAuth")
 public class ReceiptController {
-<<<<<<< HEAD
     private final IReceiptService receiptService;
-=======
-    private final ReceiptService receiptService;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
-
     @PostMapping(value="/create",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ReceiptCreateResponse> createReceipt(@RequestBody ReceiptCreateRequest request){
         return ResponseEntity.ok(receiptService.create(request));
