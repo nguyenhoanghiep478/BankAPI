@@ -24,19 +24,13 @@ public class StaticVar {
     public static final String ACCESS_DENIED_PROPERTY_REASON="access_denied_reason";
     public static final String ACCOUNT_NOT_EXIST_EXCEPTION_MESSAGE="Account not found";
     public static final BigDecimal INTEREST_RATE = BigDecimal.valueOf(7.9/100);
-<<<<<<< HEAD
-    public static final long JWT_EXPIRATION = 1000 * 60 ;
-=======
     public static final long JWT_EXPIRATION = 1000 * 60 * 60;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
     public static final String MAIL_SENDER="nguyenhoanghiep478@gmail.com";
     public static final String MAIL_SUBJECT = "Email verification";
     public static final String MAIL_TEXT="Your verification Token is: ";
     public static final int VERIFICATION_TOKEN_LENGTH = 6;
-<<<<<<< HEAD
     public static final long JWT_REFRESH_TOKEN_EXPIRATION = 1000 * 60 * 60;
     public static final String USER_EMAIL_EXISTED_EXCEPTION_MESSAGE = "This email existed!";
     public static final String MISSING_REFRESH_TOKEN_MESSAGE = "Missing Refresh Token !";
-=======
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
+
 }
