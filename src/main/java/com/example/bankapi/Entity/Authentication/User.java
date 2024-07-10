@@ -11,11 +11,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-<<<<<<< HEAD
-import org.hibernate.annotations.ColumnDefault;
-=======
 import lombok.NoArgsConstructor;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
