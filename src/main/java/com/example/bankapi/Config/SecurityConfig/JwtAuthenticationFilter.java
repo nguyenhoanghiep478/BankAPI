@@ -154,7 +154,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             JSONObject tokenResponse = new JSONObject();
             tokenResponse.put("newAccessToken", newAccessToken);
             tokenResponse.put("newRefreshToken", newRefreshToken);
-
             // Thiết lập phản hồi
             response.setStatus(HttpStatus.OK.value());
             response.setContentType("application/json");
