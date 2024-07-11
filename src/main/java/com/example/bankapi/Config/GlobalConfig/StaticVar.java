@@ -19,7 +19,6 @@ public class StaticVar {
     public static final String BLACKLISTED_TOKEN_MESSAGE = "Token is blacklisted";
     public static final String UNAUTHORIZED_EXCEPTION_MESSAGE="Authentication failure!";
     public static final String SIGNATURE_EXCEPTION_MESSAGE="Invalid Token!";
-    public static final String EXPIRED_JWT_EXCEPTION_MESSAGE="Token has already expired!";
     public static final String INTERNAL_SERVER_ERROR_MESSAGE = "Internal Server Error";
     public static final String ACCESS_DENIED_PROPERTY_REASON="access_denied_reason";
     public static final String ACCOUNT_NOT_EXIST_EXCEPTION_MESSAGE="Account not found";

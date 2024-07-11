@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: nguyenhoanghiep478/mysql:8.0
+    image: nguyenhoanghiep478/mysql:latest
     container_name: mysql-container
     restart: always
     environment:
@@ -13,7 +13,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
   bank-app:
-    image: nguyenhoanghiep478/bank-app-compose-bank-app
+    image: nguyenhoanghiep478/bank-app-compose-bank-app:latest
     restart: unless-stopped
 
     environment:
@@ -28,4 +28,3 @@ services:
 
 volumes:
   mysql-data:
-    driver: local

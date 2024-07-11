@@ -20,7 +20,6 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
 public class User implements UserDetails {
@@ -31,7 +30,6 @@ public class User implements UserDetails {
     private String password;
     private String phone;
     private String fullName;
-    @ColumnDefault("false")
     private Boolean isVerified;
     @Enumerated
     private ROLE role;

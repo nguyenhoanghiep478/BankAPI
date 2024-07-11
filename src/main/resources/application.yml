@@ -21,7 +21,7 @@ spring:
   config:
     import: optional:file:.env[.properties]
   mvc:
-    pathmatch:
+    path match:
       matching-strategy: ant_path_matcher
 
 

@@ -3,6 +3,7 @@ package com.example.bankapi.Service.Authentication.impl;
 import com.example.bankapi.Config.GlobalConfig.StaticVar;
 import com.example.bankapi.Entity.Authentication.User;
 import com.example.bankapi.Service.Authentication.IJWTService;
+import com.example.bankapi.Service.Authentication.JwtBlacklistService;
 import com.example.bankapi.Service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

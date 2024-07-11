@@ -5,9 +5,9 @@ spring:
   application:
     name: BANKAPI
   datasource:
-    url: jdbc:mysql://mysql-container:3307/bank
-    username: hiep
-    password: Hiep31082003
+    url: jdbc:mysql://${DB_HOST_DOCKER_ACTIVE}:3307/${DB_NAME_DOCKER_ACTIVE}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
@@ -22,7 +22,18 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USER_NAME}
+    password: ${GMAIL_ROOT_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 logging:
   level:

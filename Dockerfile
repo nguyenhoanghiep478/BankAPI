@@ -8,8 +8,9 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 COPY . .
-
+RUN cd gradle
 RUN chmod +x ./gradlew
+
 # Chạy lệnh build và ghi lại log
 RUN ./gradlew clean build --info -x test > build.log 2>&1 || (cat build.log && exit 1)
 

@@ -1,23 +1,19 @@
 package com.example.bankapi.Config.GlobalConfig;
 
-<<<<<<< HEAD
 import com.example.bankapi.Repositories.Authentication.User;
-=======
-import com.example.bankapi.Repositories.User;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
+import me.paulschwarz.springdotenv.DotenvPropertyLoader;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
-<<<<<<< HEAD
-=======
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
->>>>>>> 8bf2d517198aeb5b5c93bc71d0821bb6b2eddbb3
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -32,6 +28,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppConfiguration {
     private final User userRepository;
+    @Bean
+    public Dotenv dotenv(){
+        return Dotenv.configure().directory("D:\\HiepRepositoryBank\\BankAPI\\").load();
+    }
 
     @Bean
     public ModelMapper modelMapper(){
@@ -43,6 +43,7 @@ public class AppConfiguration {
         return userRepository::findByEmail;
 
     }
+
     @Bean
     public CommonsRequestLoggingFilter requestLoggingFilter() {
         CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
