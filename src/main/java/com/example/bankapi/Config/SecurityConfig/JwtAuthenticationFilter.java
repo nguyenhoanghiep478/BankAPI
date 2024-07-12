@@ -1,7 +1,6 @@
 package com.example.bankapi.Config.SecurityConfig;
 
 import com.example.bankapi.Config.GlobalConfig.StaticVar;
-import com.example.bankapi.Config.GlobalConfig.VarArgsFunction;
 import com.example.bankapi.Entity.Authentication.User;
 import com.example.bankapi.Service.Authentication.IJWTService;
 import com.example.bankapi.Service.UserService;
@@ -25,8 +24,6 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 
 @Component

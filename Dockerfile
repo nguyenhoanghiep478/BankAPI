@@ -17,8 +17,11 @@ RUN ./gradlew clean build --info -x test > build.log 2>&1 || (cat build.log && e
 # Stage 2: Package stage
 FROM openjdk:22-jdk-slim
 WORKDIR /app
+COPY --from=build /app/.env /app/.env
 COPY --from=build /app/build/libs/BANKAPI-0.0.1-SNAPSHOT.jar /app/BANKAPI-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
+
+
 
 ENV SPRING_PROFILES_ACTIVE=docker
 ENTRYPOINT ["java", "-jar", "/app/BANKAPI-0.0.1-SNAPSHOT.jar"]

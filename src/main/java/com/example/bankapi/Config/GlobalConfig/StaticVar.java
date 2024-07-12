@@ -24,11 +24,11 @@ public class StaticVar {
     public static final String ACCOUNT_NOT_EXIST_EXCEPTION_MESSAGE="Account not found";
     public static final BigDecimal INTEREST_RATE = BigDecimal.valueOf(7.9/100);
     public static final long JWT_EXPIRATION = 1000 * 60 * 60;
-    public static final String MAIL_SENDER="nguyenhoanghiep478@gmail.com";
+    public static final String MAIL_SENDER="${GMAIL_USERNAME}";
     public static final String MAIL_SUBJECT = "Email verification";
     public static final String MAIL_TEXT="Your verification Token is: ";
     public static final int VERIFICATION_TOKEN_LENGTH = 6;
-    public static final long JWT_REFRESH_TOKEN_EXPIRATION = 1000 * 60 * 60;
+    public static final long JWT_REFRESH_TOKEN_EXPIRATION = 1000 * 60 ;
     public static final String USER_EMAIL_EXISTED_EXCEPTION_MESSAGE = "This email existed!";
     public static final String MISSING_REFRESH_TOKEN_MESSAGE = "Missing Refresh Token !";
 
