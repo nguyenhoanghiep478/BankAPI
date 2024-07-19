@@ -65,7 +65,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                throw new AccessDeniedException(StaticVar.MISSING_REFRESH_TOKEN_MESSAGE);
             }
             final String token = authHeader.substring(7);
-            if (jwtService.isBlackListed(token) && jwtService.isBlackListed(refreshToken)) {
+            if (!(jwtService.isBlackListed(token) && jwtService.isBlackListed(refreshToken))) {
                 try{
                     final String userEmail = jwtService.extractUserName(token);
                     logger.debug("Extracted token: {}", token);

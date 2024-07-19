@@ -1,5 +1,6 @@
 package com.example.bankapi.Config.GlobalConfig;
 
+import com.example.bankapi.Service.RedisConnectionChecker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableRedisRepositories
 public class RedisConfiguration {
+    @Bean
     public JedisConnectionFactory connectionFactory(){
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName("localhost");
@@ -30,5 +32,9 @@ public class RedisConfiguration {
         template.setEnableTransactionSupport(true);
         template.afterPropertiesSet();
         return template;
+    }
+    @Bean
+    public RedisConnectionChecker redisConnectionChecker() {
+        return new RedisConnectionChecker(connectionFactory());
     }
 }

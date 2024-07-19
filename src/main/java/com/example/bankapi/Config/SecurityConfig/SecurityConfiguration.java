@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -16,13 +17,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AccessDeniedException accessDeniedException;
     private final CorsConfigurationSource corsConfigurationSource;
-
+    private final O2AuthLoginSuccessHandler o2AuthLoginSuccessHandler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -42,7 +44,11 @@ public class SecurityConfiguration {
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated()
+
                 )
+                .oauth2Login(oauth2->{
+                    oauth2.successHandler(o2AuthLoginSuccessHandler);
+                })
                 .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedException))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

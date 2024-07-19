@@ -9,16 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface User extends JpaRepository<com.example.bankapi.Entity.Authentication.User,Long> {
-   com.example.bankapi.Entity.Authentication.User findByEmail(String email);
+   Optional<com.example.bankapi.Entity.Authentication.User> findByEmail(String email);
     boolean existsByRole(ROLE role);
     boolean existsByEmail(String email);
-
-//    @Query("SELECT u.savingAccounts FROM User u WHERE u.email = :email")
-//    List<SavingAccount> findSavingAccountsByEmail(@Param("email") String email);
-//
-//    @Query("SELECT u.checkingAccounts FROM User u WHERE u.email = :email")
-//    List<CheckingAccount> findCheckingAccountsByEmail(@Param("email") String email);
+    com.example.bankapi.Entity.Authentication.User save(User user);
 }

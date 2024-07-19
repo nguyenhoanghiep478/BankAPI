@@ -8,7 +8,13 @@ spring:
     username: ${DB_USERNAME_DEV}
     password: ${DB_PASSWORD_DEV}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Iv23liUaViW71mNL4xeF
+            client-secret: 91f007c6b577a21aa2f3bf934c50aab4acb30565
   jpa:
     show-sql: true
     properties:
@@ -26,7 +32,7 @@ spring:
     default-encoding: UTF-8
     host: smtp.gmail.com
     port: 587
-    username: ${GMAIL_USER_NAME}
+    username: ${GMAIL_USER_NAME}`
     password: ${GMAIL_PASSWORD}
     properties:
       mail:
@@ -34,6 +40,10 @@ spring:
           auth: true
           starttls:
             enable: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 
 logging:

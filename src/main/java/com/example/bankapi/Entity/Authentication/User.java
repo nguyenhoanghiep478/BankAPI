@@ -5,10 +5,7 @@ import com.example.bankapi.Entity.BankAccount.CheckingAccount;
 import com.example.bankapi.Entity.BankAccount.SavingAccount;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +15,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @Table(name = "user")
+@ToString
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,4 +68,6 @@ public class User implements UserDetails {
     public User(){
         this.isVerified= false;
     }
+    @Enumerated
+    private RegistationSource source;
 }

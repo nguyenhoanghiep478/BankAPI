@@ -28,8 +28,9 @@ public class StaticVar {
     public static final String MAIL_SUBJECT = "Email verification";
     public static final String MAIL_TEXT="Your verification Token is: ";
     public static final int VERIFICATION_TOKEN_LENGTH = 6;
-    public static final long JWT_REFRESH_TOKEN_EXPIRATION = 1000 * 60 ;
+    public static final long JWT_REFRESH_TOKEN_EXPIRATION = 1000 * 60 * 60 * 24 ;
     public static final String USER_EMAIL_EXISTED_EXCEPTION_MESSAGE = "This email existed!";
     public static final String MISSING_REFRESH_TOKEN_MESSAGE = "Missing Refresh Token !";
 
+    public static final long ACTIVATION_CODE_EXPIRED_TIME = 15;
 }

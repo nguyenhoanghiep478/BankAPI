@@ -1,25 +1,23 @@
 services:
   mysql:
-    image: ${DOCKER_DB_IMAGE}
-    container_name: ${DOCKER_DB_CONTAINER_NAME}
+    image: nguyenhoanghiep478/mysql:latest
+    container_name: mysql-container
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DOCKER_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: Hiep31082003
       MYSQL_ALLOW_EMPTY_PASSWORD: true
-      MYSQL_DATABASE: ${DB_NAME_DOCKER_ACTIVE}
+      MYSQL_DATABASE: bank
       MYSQL_PORT: 3306
     ports:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
   bank-app:
-    image: ${DOCKER_APP_IMAGE}
-    restart: unless-stopped
-
+    image: nguyenhoanghiep478/bank-app-compose-bank-app:8.0
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://${DOCKER_DB_HOST}:3306/${DOCKER_DB_NAME}
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/bank
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Hiep31082003
       SPRING_PROFILES_ACTIVE: "docker"
     ports:
       - "8031:8080"

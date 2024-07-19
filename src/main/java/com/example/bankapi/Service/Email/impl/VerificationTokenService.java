@@ -23,16 +23,16 @@ public class VerificationTokenService implements IVerificationToken {
         token=token.replaceAll("//s","");
         Optional<UserVerificationToken> verificationToken = repository.findByToken(token);
         if(verificationToken.isEmpty()){
-            return "Invalid Token";
+            return "INVALID";
         }
         UserVerificationToken userVerificationToken = verificationToken.get();
         if(userVerificationToken.getExpiryDate().isBefore(LocalDateTime.now())){
-            return "Token Expired";
+            return "EXPIRED";
         }
         com.example.bankapi.Entity.Authentication.User user = userVerificationToken.getUser();
         user.setIsVerified(true);
         userRepository.save(user);
-        return "Your Email verified successful";
+        return "OK";
     }
 
     @Override
@@ -42,7 +42,6 @@ public class VerificationTokenService implements IVerificationToken {
         UserVerificationToken verifyToken = new UserVerificationToken();
         verifyToken.setToken(Integer.toString(token));
         verifyToken.setUser(user);
-        int length = verifyToken.getToken().length();
         repository.save(verifyToken);
         return Integer.toString(token);
     }

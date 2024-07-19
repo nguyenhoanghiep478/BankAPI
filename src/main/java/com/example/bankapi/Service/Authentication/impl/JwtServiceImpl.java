@@ -103,6 +103,6 @@ public class JwtServiceImpl implements IJWTService {
 
 
     public boolean isBlackListed(String token) {
-        return !blacklistService.isBlackListed(token);
+        return blacklistService.isBlackListed(token);
     }
 }

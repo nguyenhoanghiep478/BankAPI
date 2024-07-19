@@ -18,6 +18,7 @@ import jakarta.persistence.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -107,7 +108,7 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     public Account createInforAccount(AccountRegistryRequest request){
-        var user = this.user.findByEmail(request.getUserEmail());
+        var user = this.user.findByEmail(request.getUserEmail()).orElseThrow(()-> new BadCredentialsException("User not found"));
         var account = Account.builder()
                 .accountType(request.getAccountType().toLowerCase())
                 .createDate(LocalDateTime.now())

@@ -1,0 +1,25 @@
+services:
+  app:
+    image: openjdk:22-jdk-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: bash -c "./gradlew clean bootRun"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bank
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Hiep31082003
+      SPRING_PROFILES_ACTIVE: "docker"
+    ports:
+      - "8011:8011"
+    depends_on:
+      - db
+  db:
+    image: nguyenhoanghiep478/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Hiep31082003
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: bank
+      MYSQL_PORT: 3306
+    ports:
+      - "3308:3306"
