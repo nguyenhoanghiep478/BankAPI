@@ -42,7 +42,7 @@ public class AppConfiguration {
         if(isRunningOnDocker()){
             return Dotenv.configure().directory("/app").load();
         }else{
-            return Dotenv.configure().directory("/HiepRepositoryBank/BankAPI/").load();
+            return Dotenv.configure().directory("/HiepRepositoryBank/BankAPI/Backend").load();
         }
 
     }
