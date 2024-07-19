@@ -10,6 +10,7 @@ Trước tiên, đảm bảo rằng bạn đã cài đặt Docker và Docker Com
 
 ```bash
 docker-compose -f docker-compose.yml up -d
+```
 
 ### Truy cập Swagger
 
