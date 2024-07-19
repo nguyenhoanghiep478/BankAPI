@@ -7,9 +7,9 @@ Trước tiên, đảm bảo rằng bạn đã cài đặt Docker và Docker Com
 ## Chạy file docker-compose
 
 Để khởi động ứng dụng, bạn cần chạy file `docker-compose.yml` bằng lệnh sau:
-
 ```bash
 docker-compose -f docker-compose.yml up -d
+
 ```
 
 ### Truy cập Swagger
